@@ -1,8 +1,12 @@
+import { Link } from "expo-router"
 import { View, Text } from "react-native"
 
-const LoginScreen = () =>{
+const LoginScreen = () => {
   return (
-  <View><Text>Login</Text></View>
+    <View>
+      <Link href="/(auth)/register">ir a registro</Link>
+      <Link href="/(main)/dashboard">ir a main</Link>
+    </View>
   )
 }
 

@@ -1,9 +1,12 @@
 
+import { Link } from "expo-router"
 import { View, Text } from "react-native"
 
 const RegisterScreen = () =>{
   return (
-  <View><Text>Register</Text></View>
+    <View>
+      <Link href="/(auth)/login">ir a login</Link>
+    </View>
   )
 }
 
