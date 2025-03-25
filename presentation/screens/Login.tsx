@@ -1,13 +1,19 @@
-import { Link } from "expo-router"
-import { View } from "react-native"
+import { View, StyleSheet,Text } from "react-native"
 
 const LoginScreen = () => {
   return (
-    <View>
-      <Link href="/(auth)/register">ir a registro</Link>
-      <Link href="/(main)/dashboard">ir a main</Link>
+    <View style={styles.container}>
+      <Text>Prueba de login</Text>
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container:{
+    flex:1,
+    justifyContent:"center",
+    alignItems:"center"
+  }
+})
 
 export default LoginScreen
