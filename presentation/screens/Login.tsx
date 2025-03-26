@@ -1,9 +1,12 @@
-import { View, StyleSheet,Text } from "react-native"
+import { View, StyleSheet} from "react-native"
+import FormLogin from "../components/auth/Form"
+import FontShape from "../components/auth/FontShape"
 
 const LoginScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>Prueba de login</Text>
+      <FontShape/>
+      <FormLogin/>
     </View>
   )
 }
@@ -11,7 +14,7 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
   container:{
     flex:1,
-    justifyContent:"center",
+    backgroundColor:"#3e7de9",
     alignItems:"center"
   }
 })
