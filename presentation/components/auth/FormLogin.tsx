@@ -2,53 +2,9 @@ import React from 'react';
 import { View, Text, TextInput, StyleSheet, Pressable } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { LoginInput } from '../../../utils/types/InputLogin';
+import LinkRegister from './LinkRegister';
 
 
-const styles = StyleSheet.create({
-  button: {
-    padding: 18,
-    borderRadius: 10,
-    backgroundColor: '#007bff',
-  },
-  buttonText: {
-    color: 'white',
-    textAlign: 'center',
-  },
-  input: {
-    height: 60,
-    padding: 12,
-    borderWidth: 2,
-    borderRadius: 10,
-    borderColor: "#666",
-    marginVertical: 4
-  },
-  title: {
-    fontSize: 42,
-    fontWeight: 700,
-    textAlign: "center",
-    color: "#fff",
-  },
-  container: {
-    width: "85%",
-    marginTop:10,
-    flex: 1,
-    justifyContent:"space-around",
-    zIndex:20
-  },
-  containerInput: {
-    marginVertical: 20
-  },
-  textLabel: {
-    fontSize: 18,
-    fontWeight: 500,
-    color: "#666"
-  },
-  errorText: {
-    fontSize: 13,
-    color: "#c00",
-    fontWeight: 500
-  },
-});
 
 
 const FormLogin = () => {
@@ -73,7 +29,6 @@ const FormLogin = () => {
               <Text style={styles.textLabel}>Email</Text>
               <TextInput
                 style={styles.input}
-                placeholder="Email"
                 autoComplete='email'
                 value={value}
                 onBlur={onBlur}
@@ -94,7 +49,6 @@ const FormLogin = () => {
               <Text style={styles.textLabel}>Contraseña</Text>
               <TextInput
                 style={styles.input}
-                placeholder="Contraseña"
                 secureTextEntry
                 value={value}
                 autoComplete='password'
@@ -106,11 +60,66 @@ const FormLogin = () => {
         />
         {errors.password && <Text style={styles.errorText}>La contraseña es requerida y debe tener al menos 6 caracteres</Text>}
       </View>
-      <Pressable onPress={handleSubmit(onSubmit)} style={styles.button}>
+      <View>
+      <Pressable onPress={handleSubmit(onSubmit)}
+        style={({ pressed }) => [{
+          backgroundColor: pressed ? "#016ee2" : "#007bff"
+        },
+        styles.button
+        ]}
+      >
         <Text style={styles.buttonText}>Iniciar Sesión</Text>
       </Pressable>
+      <LinkRegister/>
+      </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  button: {
+    padding: 19,
+    borderRadius: 10,
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 500,
+    textAlign: 'center',
+  },
+  input: {
+    height: 55,
+    padding: 12,
+    borderWidth: 2,
+    borderRadius: 10,
+    borderColor: "#666",
+    marginVertical: 4
+  },
+  title: {
+    fontSize: 40,
+    fontWeight: 700,
+    textAlign: "center",
+    color: "#fff",
+  },
+  container: {
+    width: "90%",
+    marginTop: 10,
+    flex: 1,
+    justifyContent: "space-around",
+    zIndex: 20
+  },
+  containerInput: {
+    marginVertical: 15
+  },
+  textLabel: {
+    fontSize: 16,
+    fontWeight: 500,
+    color: "#666"
+  },
+  errorText: {
+    fontSize: 13,
+    color: "#c00",
+    fontWeight: 500
+  },
+});
 
 export default FormLogin
