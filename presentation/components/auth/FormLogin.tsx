@@ -5,8 +5,6 @@ import { LoginInput } from '../../../utils/types/InputLogin';
 import LinkRegister from './LinkRegister';
 
 
-
-
 const FormLogin = () => {
   const { control, handleSubmit, formState: { errors } } = useForm<LoginInput>();
 
@@ -61,16 +59,16 @@ const FormLogin = () => {
         {errors.password && <Text style={styles.errorText}>La contraseña es requerida y debe tener al menos 6 caracteres</Text>}
       </View>
       <View>
-      <Pressable onPress={handleSubmit(onSubmit)}
-        style={({ pressed }) => [{
-          backgroundColor: pressed ? "#016ee2" : "#007bff"
-        },
-        styles.button
-        ]}
-      >
-        <Text style={styles.buttonText}>Iniciar Sesión</Text>
-      </Pressable>
-      <LinkRegister/>
+        <Pressable onPress={handleSubmit(onSubmit)}
+          style={({ pressed }) => [{
+            backgroundColor: pressed ? "#016ee2" : "#007bff"
+          },
+          styles.button
+          ]}
+        >
+          <Text style={styles.buttonText}>Iniciar Sesión</Text>
+        </Pressable>
+        <LinkRegister />
       </View>
     </View>
   );
