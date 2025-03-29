@@ -1,5 +1,6 @@
 import { Link } from "expo-router"
 import { View, Text, StyleSheet } from "react-native"
+import { backgroundColors } from "../../theme/colors"
 
 const LinkRegister = () => {
   return (
@@ -24,7 +25,7 @@ const styles = StyleSheet.create(({
     textAlign:"center"
   },
   textLink: {
-    color:"#007bff"
+    color:backgroundColors.secondary
   }
 }))
 

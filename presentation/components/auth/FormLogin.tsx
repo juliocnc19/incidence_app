@@ -5,6 +5,7 @@ import { LoginInput } from '../../../utils/types/InputLogin';
 import LinkRegister from './LinkRegister';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { userLoginSchema } from '../../../utils/schemas/userLoginSchema';
+import { backgroundColors, fontColors } from '../../theme/colors';
 
 
 
@@ -64,7 +65,7 @@ const FormLogin = () => {
       <View>
         <Pressable onPress={handleSubmit(onSubmit)}
           style={({ pressed }) => [{
-            backgroundColor: pressed ? "#016ee2" : "#007bff"
+            backgroundColor: pressed ? backgroundColors.ternary : backgroundColors.ternary
           },
           styles.button
           ]}
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   buttonText: {
-    color: 'white',
+    color: fontColors.ternary,
     fontWeight: 500,
     textAlign: 'center',
   },
@@ -92,14 +93,14 @@ const styles = StyleSheet.create({
     padding: 12,
     borderWidth: 2,
     borderRadius: 10,
-    borderColor: "#666",
+    borderColor: fontColors.secondary,
     marginVertical: 4
   },
   title: {
     fontSize: 40,
     fontWeight: 700,
     textAlign: "center",
-    color: "#fff",
+    color: fontColors.primary,
   },
   container: {
     width: "90%",
@@ -114,11 +115,11 @@ const styles = StyleSheet.create({
   textLabel: {
     fontSize: 16,
     fontWeight: 500,
-    color: "#666"
+    color: fontColors.secondary
   },
   errorText: {
     fontSize: 13,
-    color: "#c00",
+    color: fontColors.error,
     fontWeight: 500
   },
 });

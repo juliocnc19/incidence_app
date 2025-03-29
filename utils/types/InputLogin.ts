@@ -1,4 +1,4 @@
-import User from "../../core/entities/User"
+import User from "../../core/models/User"
 
 export type LoginInput = {
   email: User['email']

@@ -1,4 +1,5 @@
 import { View, StyleSheet } from "react-native"
+import { backgroundColors } from "../../theme/colors"
 
 const FontShape = ()=>{
   return <View style={styles.container}/>
@@ -10,7 +11,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom:0,
-    backgroundColor:"#fff",
+    backgroundColor:backgroundColors.primary,
     height: '75%',     
     borderTopLeftRadius:40,
     borderTopRightRadius:40,

@@ -3,54 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { InputRegister } from '../../../utils/types/InputRegister';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { userRegisterSchema } from '../../../utils/schemas/userRegisterSchema';
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: "90%",
-  },
-  scrollContainer: {
-    height: "40%"
-  },
-  button: {
-    marginBottom: 10,
-    padding: 19,
-    borderRadius: 10,
-  },
-  buttonText: {
-    color: '#fff',
-    fontWeight: 500,
-    textAlign: 'center',
-  },
-  input: {
-    height: 55,
-    padding: 12,
-    borderWidth: 2,
-    borderRadius: 10,
-    borderColor: "#666",
-    marginTop: 2
-  },
-  title: {
-    fontSize: 36,
-    fontWeight: 500,
-    textAlign: "center",
-    color: "#555",
-  },
-  containerInput: {
-    marginVertical: 10
-  },
-  textLabel: {
-    fontSize: 16,
-    fontWeight: 500,
-    color: "#666"
-  },
-  errorText: {
-    fontSize: 13,
-    color: "#c00",
-    fontWeight: 500
-  },
-})
+import { backgroundColors, fontColors } from '../../theme/colors';
 
 
 const RegisterForm = () => {
@@ -168,7 +121,7 @@ const RegisterForm = () => {
       </ScrollView>
       <Pressable onPress={handleSubmit(onSubmit)}
         style={({ pressed }) => [{
-          backgroundColor: pressed ? "#016ee2" : "#007bff"
+          backgroundColor: pressed ? backgroundColors.ternary : backgroundColors.secondary
         },
         styles.button
         ]}
@@ -178,5 +131,54 @@ const RegisterForm = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    width: "90%",
+  },
+  scrollContainer: {
+    height: "40%"
+  },
+  button: {
+    marginBottom: 10,
+    padding: 19,
+    borderRadius: 10,
+  },
+  buttonText: {
+    color: fontColors.ternary,
+    fontWeight: 500,
+    textAlign: 'center',
+  },
+  input: {
+    height: 55,
+    padding: 12,
+    borderWidth: 2,
+    borderRadius: 10,
+    borderColor: fontColors.secondary,
+    marginTop: 2
+  },
+  title: {
+    fontSize: 36,
+    fontWeight: 500,
+    textAlign: "center",
+    color: fontColors.secondary,
+  },
+  containerInput: {
+    marginVertical: 10
+  },
+  textLabel: {
+    fontSize: 16,
+    fontWeight: 500,
+    color: fontColors.secondary
+  },
+  errorText: {
+    fontSize: 13,
+    color: fontColors.error,
+    fontWeight: 500
+  },
+})
+
+
 
 export default RegisterForm
