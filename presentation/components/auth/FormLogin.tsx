@@ -3,10 +3,15 @@ import { View, Text, TextInput, StyleSheet, Pressable } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { LoginInput } from '../../../utils/types/InputLogin';
 import LinkRegister from './LinkRegister';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { userLoginSchema } from '../../../utils/schemas/userLoginSchema';
+
 
 
 const FormLogin = () => {
-  const { control, handleSubmit, formState: { errors } } = useForm<LoginInput>();
+  const { control, handleSubmit, formState: { errors } } = useForm<LoginInput>({
+    resolver:zodResolver(userLoginSchema),
+  });
 
   const onSubmit = (data: any) => {
     console.log(data);
@@ -19,7 +24,6 @@ const FormLogin = () => {
         <Controller
           control={control}
           name="email"
-          rules={{ required: true, pattern: /^\S+@\S+$/i }}
           render={({ field: { value, onBlur, onChange } }) => (
             <View
               style={styles.containerInput}
@@ -39,7 +43,6 @@ const FormLogin = () => {
         <Controller
           control={control}
           name="password"
-          rules={{ required: true, minLength: 6 }}
           render={({ field: { value, onBlur, onChange } }) => (
             <View
               style={styles.containerInput}

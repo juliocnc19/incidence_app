@@ -1,6 +1,8 @@
 import { View, Text, TextInput, StyleSheet, Pressable, ScrollView } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { InputRegister } from '../../../utils/types/InputRegister';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { userRegisterSchema } from '../../../utils/schemas/userRegisterSchema';
 
 
 const styles = StyleSheet.create({
@@ -12,7 +14,7 @@ const styles = StyleSheet.create({
     height: "40%"
   },
   button: {
-    marginBottom:10,
+    marginBottom: 10,
     padding: 19,
     borderRadius: 10,
   },
@@ -27,7 +29,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 10,
     borderColor: "#666",
-    marginVertical: 4
+    marginTop: 2
   },
   title: {
     fontSize: 36,
@@ -36,7 +38,7 @@ const styles = StyleSheet.create({
     color: "#555",
   },
   containerInput: {
-    marginVertical: 12
+    marginVertical: 10
   },
   textLabel: {
     fontSize: 16,
@@ -52,7 +54,9 @@ const styles = StyleSheet.create({
 
 
 const RegisterForm = () => {
-  const { control, handleSubmit, formState: { errors } } = useForm<InputRegister>();
+  const { control, handleSubmit, formState: { errors } } = useForm<InputRegister>({
+    resolver: zodResolver(userRegisterSchema)
+  });
 
   const onSubmit = (data: any) => {
     console.log(data);
@@ -65,7 +69,6 @@ const RegisterForm = () => {
         <Controller
           control={control}
           name="first_name"
-          rules={{ required: true }}
           render={({ field: { value, onBlur, onChange } }) => (
             <View style={styles.containerInput}>
               <Text style={styles.textLabel}>Nombre</Text>
@@ -75,14 +78,13 @@ const RegisterForm = () => {
                 onBlur={onBlur}
                 onChangeText={onChange}
               />
+              {errors.first_name && <Text style={styles.errorText}>{errors.first_name.message}</Text>}
             </View>
           )}
         />
-        {errors.first_name && <Text style={styles.errorText}>Nombre is required.</Text>}
         <Controller
           control={control}
           name="last_name"
-          rules={{ required: true }}
           render={({ field: { value, onBlur, onChange } }) => (
             <View style={styles.containerInput}>
               <Text style={styles.textLabel}>Apellido</Text>
@@ -92,14 +94,13 @@ const RegisterForm = () => {
                 onBlur={onBlur}
                 onChangeText={onChange}
               />
+              {errors.last_name && <Text style={styles.errorText}>{errors.last_name.message}</Text>}
             </View>
           )}
         />
-        {errors.last_name && <Text>Apellidos is required.</Text>}
         <Controller
           control={control}
           name="username"
-          rules={{ required: true }}
           render={({ field: { value, onBlur, onChange } }) => (
             <View style={styles.containerInput}>
               <Text style={styles.textLabel}>Nombre de usuario</Text>
@@ -110,14 +111,13 @@ const RegisterForm = () => {
                 onChangeText={onChange}
               />
 
+              {errors.username && <Text style={styles.errorText}>{errors.username.message}</Text>}
             </View>
           )}
         />
-        {errors.username && <Text style={styles.errorText}>Usuario is required.</Text>}
         <Controller
           control={control}
           name="email"
-          rules={{ required: true, pattern: /^\S+@\S+$/i }}
           render={({ field: { value, onBlur, onChange } }) => (
             <View style={styles.containerInput}>
               <Text style={styles.textLabel}>Correo Electronico</Text>
@@ -127,14 +127,13 @@ const RegisterForm = () => {
                 onBlur={onBlur}
                 onChangeText={onChange}
               />
+              {errors.email && <Text style={styles.errorText}>{errors.email.message}</Text>}
             </View>
           )}
         />
-        {errors.email && <Text style={styles.errorText}>Email is required and must be valid.</Text>}
         <Controller
           control={control}
           name="password"
-          rules={{ required: true, minLength: 6 }}
           render={({ field: { value, onBlur, onChange } }) => (
             <View style={styles.containerInput}>
               <Text style={styles.textLabel}>Contraseña</Text>
@@ -145,14 +144,13 @@ const RegisterForm = () => {
                 onBlur={onBlur}
                 onChangeText={onChange}
               />
+              {errors.password && <Text style={styles.errorText}>{errors.password.message}</Text>}
             </View>
           )}
         />
-        {errors.password && <Text style={styles.errorText}>Password is required and must be at least 6 characters.</Text>}
         <Controller
           control={control}
           name="repet_password"
-          rules={{ required: true, minLength: 6 }}
           render={({ field: { value, onBlur, onChange } }) => (
             <View style={styles.containerInput}>
               <Text style={styles.textLabel}>Repetir contraseña</Text>
@@ -163,17 +161,17 @@ const RegisterForm = () => {
                 onBlur={onBlur}
                 onChangeText={onChange}
               />
+              {errors.repet_password && <Text style={styles.errorText}>{errors.repet_password.message}</Text>}
             </View>
           )}
         />
-        {errors.repet_password && <Text style={styles.errorText}>{errors.repet_password.message}</Text>}
       </ScrollView>
       <Pressable onPress={handleSubmit(onSubmit)}
-          style={({ pressed }) => [{
-            backgroundColor: pressed ? "#016ee2" : "#007bff"
-          },
-          styles.button
-          ]}
+        style={({ pressed }) => [{
+          backgroundColor: pressed ? "#016ee2" : "#007bff"
+        },
+        styles.button
+        ]}
       >
         <Text style={styles.buttonText}>Registrarse</Text>
       </Pressable>
