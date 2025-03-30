@@ -1,22 +1,24 @@
-import React from 'react';
-import { View, Text, TextInput, StyleSheet, Pressable } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, StyleSheet, Pressable, ActivityIndicator } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { LoginInput } from '../../../utils/types/InputLogin';
 import LinkRegister from './LinkRegister';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { userLoginSchema } from '../../../utils/schemas/userLoginSchema';
 import { backgroundColors, fontColors } from '../../theme/colors';
-
-
+import { useLoginUser } from '../../hooks/useLoginUser';
 
 const FormLogin = () => {
   const { control, handleSubmit, formState: { errors } } = useForm<LoginInput>({
-    resolver:zodResolver(userLoginSchema),
+    resolver: zodResolver(userLoginSchema),
   });
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const { data, isPending, isError, mutate, error } = useLoginUser()
+
+  const onSubmit = (input: LoginInput) => {
+    mutate(input)
   };
+
 
   return (
     <View style={styles.container}>
@@ -37,10 +39,10 @@ const FormLogin = () => {
                 onBlur={onBlur}
                 onChangeText={onChange}
               />
+              {errors.email && <Text style={styles.errorText}>El correo es requerido y debe ser valido</Text>}
             </View>
           )}
         />
-        {errors.email && <Text style={styles.errorText}>El correo es requerido y debe ser valido</Text>}
         <Controller
           control={control}
           name="password"
@@ -57,20 +59,23 @@ const FormLogin = () => {
                 onBlur={onBlur}
                 onChangeText={onChange}
               />
+              {errors.password && <Text style={styles.errorText}>La contraseña es requerida y debe tener al menos 6 caracteres</Text>}
             </View>
           )}
         />
-        {errors.password && <Text style={styles.errorText}>La contraseña es requerida y debe tener al menos 6 caracteres</Text>}
       </View>
       <View>
         <Pressable onPress={handleSubmit(onSubmit)}
           style={({ pressed }) => [{
-            backgroundColor: pressed ? backgroundColors.ternary : backgroundColors.ternary
+            backgroundColor: pressed ? backgroundColors.ternary : backgroundColors.secondary
           },
           styles.button
           ]}
         >
-          <Text style={styles.buttonText}>Iniciar Sesión</Text>
+          {isPending ?
+            <ActivityIndicator size={"small"} color={backgroundColors.primary} /> :
+            <Text style={styles.buttonText}>Iniciar Sesión</Text>
+          }
         </Pressable>
         <LinkRegister />
       </View>
@@ -100,7 +105,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: 700,
     textAlign: "center",
-    color: fontColors.primary,
+    color: fontColors.secondary,
   },
   container: {
     width: "90%",
@@ -110,7 +115,7 @@ const styles = StyleSheet.create({
     zIndex: 20
   },
   containerInput: {
-    marginVertical: 15
+    marginVertical: 17
   },
   textLabel: {
     fontSize: 16,

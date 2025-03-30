@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 const envSchema = z.object({
-  EXPO_PUBLIC_API_URL: z.string().url('EXPO_PUBLIC_API_URL debe ser una URL válida'),
+  EXPO_PUBLIC_API_URL: z.string(),
 });
 
 function environments() {
