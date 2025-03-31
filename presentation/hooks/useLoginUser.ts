@@ -10,6 +10,9 @@ export const useLoginUser = () => {
     onSuccess: async (data) => {
       await saveToken(data.token)
       router.push("/(main)/dashboard")
+    },
+    onError:(e)=>{
+      console.log(e)
     }
   })
 }

@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { userLoginSchema } from '../../../utils/schemas/userLoginSchema';
 import { backgroundColors, fontColors } from '../../theme/colors';
 import { useLoginUser } from '../../hooks/useLoginUser';
+import MessageError from './MessageError';
 
 const FormLogin = () => {
   const { control, handleSubmit, formState: { errors } } = useForm<LoginInput>({
@@ -39,7 +40,7 @@ const FormLogin = () => {
                 onBlur={onBlur}
                 onChangeText={onChange}
               />
-              {errors.email && <Text style={styles.errorText}>El correo es requerido y debe ser valido</Text>}
+              {errors.email && <Text style={styles.errorText}>{errors.email.message}</Text>}
             </View>
           )}
         />
@@ -59,12 +60,13 @@ const FormLogin = () => {
                 onBlur={onBlur}
                 onChangeText={onChange}
               />
-              {errors.password && <Text style={styles.errorText}>La contraseña es requerida y debe tener al menos 6 caracteres</Text>}
+              {errors.password && <Text style={styles.errorText}>{errors.email?.message}</Text>}
             </View>
           )}
         />
       </View>
       <View>
+        {isError && <MessageError message={(error as any)?.response?.status == 401 ? "Credenciales invalidas" : error.message}/>}
         <Pressable onPress={handleSubmit(onSubmit)}
           style={({ pressed }) => [{
             backgroundColor: pressed ? backgroundColors.ternary : backgroundColors.secondary
