@@ -4,6 +4,11 @@ import { InputRegister } from '../../../utils/types/InputRegister';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { userRegisterSchema } from '../../../utils/schemas/userRegisterSchema';
 import { backgroundColors, fontColors } from '../../theme/colors';
+import { useRegisterUser } from '../../hooks/userRegisterUser';
+import { useRouter } from 'expo-router';
+import { saveToken } from '../../../utils/lib/saveToken';
+import { useState } from 'react';
+import MessageError from './MessageError';
 
 
 const RegisterForm = () => {
@@ -11,13 +16,26 @@ const RegisterForm = () => {
     resolver: zodResolver(userRegisterSchema)
   });
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const { isPending, isError, mutate } = useRegisterUser()
+  const router = useRouter()
+  const [message,setMessage] = useState<string>("")
+
+  const onSubmit = async (data: InputRegister) => {
+    mutate(data, {
+      onSuccess: async (data) => {
+        await saveToken(data.token)
+        router.push("/(main)/dashboard")
+      },
+      onError: (err:any)=>{
+        setMessage(err.response.data.error)
+      }
+    })
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Registro</Text>
+      {isError && <MessageError message={message}/>}
       <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
         <Controller
           control={control}

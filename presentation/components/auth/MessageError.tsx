@@ -16,9 +16,9 @@ const styles = StyleSheet.create({
     textAlign: "center"
   },
   container: {
-    padding: 2,
+    padding: 4,
     marginVertical:8,
-    borderRadius: 15,
+    borderRadius: 12,
     backgroundColor: fontColors.error
   }
 })

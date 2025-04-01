@@ -8,16 +8,30 @@ import { userLoginSchema } from '../../../utils/schemas/userLoginSchema';
 import { backgroundColors, fontColors } from '../../theme/colors';
 import { useLoginUser } from '../../hooks/useLoginUser';
 import MessageError from './MessageError';
+import { saveToken } from '../../../utils/lib/saveToken';
+import { useRouter } from 'expo-router';
 
-const FormLogin = () => {
+const LoginForm = () => {
   const { control, handleSubmit, formState: { errors } } = useForm<LoginInput>({
     resolver: zodResolver(userLoginSchema),
   });
 
-  const { data, isPending, isError, mutate, error } = useLoginUser()
+  const [message, setMessage] = useState<string>("")
 
-  const onSubmit = (input: LoginInput) => {
-    mutate(input)
+  const { isPending, isError, mutate } = useLoginUser()
+  const router = useRouter()
+
+  const onSubmit = async (input: LoginInput) => {
+    mutate(input, {
+      onSuccess: async (data) => {
+        console.log(data)
+        await saveToken(data.token)
+        router.push('/(main)/dashboard')
+      },
+      onError: (err: any) => {
+        setMessage(err.response.data.detail)
+      }
+    })
   };
 
 
@@ -60,13 +74,13 @@ const FormLogin = () => {
                 onBlur={onBlur}
                 onChangeText={onChange}
               />
-              {errors.password && <Text style={styles.errorText}>{errors.email?.message}</Text>}
+              {errors.password && <Text style={styles.errorText}>{errors.password.message}</Text>}
             </View>
           )}
         />
       </View>
       <View>
-        {isError && <MessageError message={(error as any)?.response?.status == 401 ? "Credenciales invalidas" : error.message}/>}
+        {isError && <MessageError message={message} />}
         <Pressable onPress={handleSubmit(onSubmit)}
           style={({ pressed }) => [{
             backgroundColor: pressed ? backgroundColors.ternary : backgroundColors.secondary
@@ -131,4 +145,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FormLogin
+export default LoginForm

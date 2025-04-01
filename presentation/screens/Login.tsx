@@ -1,11 +1,11 @@
 import { View, StyleSheet} from "react-native"
-import FormLogin from "../components/auth/FormLogin"
+import LoginForm from "../components/auth/LoginForm"
 import { backgroundColors } from "../theme/colors"
 
 const LoginScreen = () => {
   return (
     <View style={styles.container}>
-      <FormLogin/>
+      <LoginForm/>
     </View>
   )
 }
