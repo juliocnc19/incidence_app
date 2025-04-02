@@ -10,21 +10,23 @@ import { useLoginUser } from '../../hooks/useLoginUser';
 import MessageError from './MessageError';
 import { saveToken } from '../../../utils/lib/saveToken';
 import { useRouter } from 'expo-router';
+import { authstorage } from '../../../data/storage/authStorage';
 
 const LoginForm = () => {
   const { control, handleSubmit, formState: { errors } } = useForm<LoginInput>({
     resolver: zodResolver(userLoginSchema),
   });
 
-  const [message, setMessage] = useState<string>("")
-
+  const { setUser } = authstorage()
   const { isPending, isError, mutate } = useLoginUser()
   const router = useRouter()
+  const [message, setMessage] = useState<string>("")
 
   const onSubmit = async (input: LoginInput) => {
     mutate(input, {
       onSuccess: async (data) => {
         console.log(data)
+        setUser(data)
         await saveToken(data.token)
         router.push('/(main)/dashboard')
       },

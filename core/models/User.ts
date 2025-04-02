@@ -7,6 +7,7 @@ export default interface User {
   password: string
   avatar_url: string
   role_id: string
-  created_at?: string
-  updated_at?: string
+  created_at: string
+  updated_at: string
+  token:string
 }
