@@ -1,7 +1,9 @@
 import User from "../../core/models/User"
 
 export type authStorageType = {
-  user: User | null,
+  user: User | null
+  isSidebarVisible:boolean
+  toggleSidebar: () => void
   setUser: (user: User | null) => void
 }
 

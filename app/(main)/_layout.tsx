@@ -5,12 +5,16 @@ import { View } from 'react-native';
 import { fontColors } from '../../presentation/theme/colors';
 import NotificationButton from '../../presentation/components/shared/NotificationButton';
 import MenuButton from '../../presentation/components/shared/MenuButton';
+import { authStorage } from '../../data/storage/authStorage';
+import MenuSide from '../../presentation/components/shared/MenuSide';
 
 
 const MainLayout = () => {
+  const {isSidebarVisible} = authStorage()
   return (
     <View style={{ flex: 1 }}>
       <StatusBar style='auto' />
+      {isSidebarVisible && <MenuSide/>}
       <Tabs initialRouteName='dashboard'>
         <Tabs.Screen
           name="dashboard"
