@@ -1,14 +1,15 @@
-export const backgroundColors ={
-  primary:"#fff",
-  secondary:"#007bff",
-  ternary:"#016ee2"
-}
+export const backgroundColors = {
+  primary: "#fff", // White
+  secondary: "#007bff", // Blue
+  ternary: "#016ee2", // Light blue
+};
 
 export const fontColors = {
-  primary:"#000",
-  secondary:"#666",
-  ternary:"#fff",
-  error:"#c00",
-  success:"#0c0"
-}
+  primary: "#000", // Black
+  secondary: "#666", // Gray
+  ternary: "#fff", // White
+  error: "#c00", // Red
+  success: "#0c0", // Green
+  alert: "#007bff", // Blue
+};
 
