@@ -4,17 +4,13 @@ import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
 import { fontColors } from '../../presentation/theme/colors';
 import NotificationButton from '../../presentation/components/shared/NotificationButton';
-import MenuButton from '../../presentation/components/shared/MenuButton';
-import { authStorage } from '../../data/storage/authStorage';
-import MenuSide from '../../presentation/components/shared/MenuSide';
+import CloseSessionButton from '../../presentation/components/shared/CloseSessionButton';
 
 
 const MainLayout = () => {
-  const {isSidebarVisible} = authStorage()
   return (
     <View style={{ flex: 1 }}>
       <StatusBar style='auto' />
-      {isSidebarVisible && <MenuSide/>}
       <Tabs initialRouteName='dashboard'>
         <Tabs.Screen
           name="dashboard"
@@ -26,7 +22,7 @@ const MainLayout = () => {
             },
             headerTitleAlign: "center",
             headerRight: () => <NotificationButton />,
-            headerLeft: () => <MenuButton />,
+            headerLeft: () => <CloseSessionButton />,
             tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} />,
           }}
         />
@@ -40,7 +36,7 @@ const MainLayout = () => {
             },
             headerTitleAlign: "center",
             headerRight: () => <NotificationButton />,
-            headerLeft: () => <MenuButton />,
+            headerLeft: () => <CloseSessionButton />,
             tabBarIcon: ({ color }) => <FontAwesome size={28} name="edit" color={color} />,
           }}
         />
