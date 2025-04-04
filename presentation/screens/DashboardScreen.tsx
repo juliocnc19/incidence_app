@@ -1,10 +1,18 @@
-import { View, Text } from "react-native"
+import ListIncident from "../components/dashboard/ListIncident"
+import { authStorage } from "../../data/storage/authStorage"
+import { useGetIncidentsByUser } from "../hooks/useGetIncidentsByUser"
+import { ActivityIndicator} from "react-native"
 
 const DashboardScreen = () => {
+  const { user } = authStorage()
+  const { data, isLoading, isError, error } = useGetIncidentsByUser(user!.id)
   return (
-    <View>
-      <Text>Dashboard</Text>
-    </View>
+    <>
+      {(isLoading) ?
+        <ActivityIndicator/> :
+        <ListIncident data={data?.data} isError={isError} error={error}/>
+      }
+    </>
   )
 }
 

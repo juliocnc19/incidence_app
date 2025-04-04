@@ -1,4 +1,4 @@
-export interface Incident {
+export default interface Incident {
   id: number
   title: string
   description: string
@@ -6,6 +6,6 @@ export interface Incident {
   status_id: number
   response: string
   user_id: number
-  created_at?: string
-  updated_at?: string
+  created_at: string
+  updated_at: string
 }

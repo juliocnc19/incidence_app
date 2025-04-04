@@ -25,8 +25,7 @@ const LoginForm = () => {
   const onSubmit = async (input: LoginInput) => {
     mutate(input, {
       onSuccess: async (data) => {
-        console.log(data)
-        setUser(data)
+        setUser(data.data)
         await saveToken(data.token)
         router.replace('/(main)/dashboard')
       },
