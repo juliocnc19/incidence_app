@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet } from "react-native"
+import { FlatList, StyleSheet, View } from "react-native"
 import Incident from "../../../core/models/Incident"
 import EmptyIncident from "./EmptyIncident"
 import ItemIncident from "./ItemIncident"
@@ -10,22 +10,28 @@ const ListIncident = ({ data, isError, error }: { data?: Incident[], isError: bo
       {!isError ?
         <>
           {data?.length == 0 ?
-          <EmptyIncident/> :
-          <FlatList
-          data={data}
-          renderItem={({item}) => <ItemIncident item={item}/>}
-          />
+            <EmptyIncident /> :
+            <View style={styles.container}>
+              <FlatList
+                style={{ width: "100%" }}
+                data={data}
+                renderItem={({ item }) => <ItemIncident item={item} />}
+              />
+            </View>
           }
         </>
         :
-        <MessageError message={(error as any).response.data.detail}/>
+        <MessageError message={(error as any).response.data.detail} />
       }
     </>
   )
 }
 
 const styles = StyleSheet.create({
-
+  container: {
+    width: "100%",
+    flex: 1,
+  }
 })
 
 export default ListIncident

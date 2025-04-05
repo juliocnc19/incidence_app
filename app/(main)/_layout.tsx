@@ -20,6 +20,7 @@ const MainLayout = () => {
               color: fontColors.secondary,
               fontSize: 20
             },
+            animation:"shift",
             headerTitleAlign: "center",
             headerRight: () => <NotificationButton />,
             headerLeft: () => <CloseSessionButton />,
@@ -35,6 +36,7 @@ const MainLayout = () => {
               fontSize: 20
             },
             headerTitleAlign: "center",
+            animation:"shift",
             headerRight: () => <NotificationButton />,
             headerLeft: () => <CloseSessionButton />,
             tabBarIcon: ({ color }) => <FontAwesome size={28} name="edit" color={color} />,
