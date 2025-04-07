@@ -1,3 +1,5 @@
+import User from "./User"
+
 export default interface Incident {
   id: number
   title: string
@@ -5,6 +7,7 @@ export default interface Incident {
   status_id: 1|2|3
   response: string
   user_id: number
+  user:User
   created_at: string
   updated_at: string
 }

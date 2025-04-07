@@ -1,6 +1,5 @@
 import { FontAwesome } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
 import { fontColors } from '../../presentation/theme/colors';
 import NotificationButton from '../../presentation/components/shared/NotificationButton';
@@ -10,7 +9,6 @@ import CloseSessionButton from '../../presentation/components/shared/CloseSessio
 const MainLayout = () => {
   return (
     <View style={{ flex: 1 }}>
-      <StatusBar style='auto' />
       <Tabs initialRouteName='dashboard'>
         <Tabs.Screen
           name="dashboard"
