@@ -1,3 +1,5 @@
+import Attachment from "./Attachment"
+import Status from "./Status"
 import User from "./User"
 
 export default interface Incident {
@@ -10,4 +12,6 @@ export default interface Incident {
   user:User
   created_at: string
   updated_at: string
+  attachment:Attachment[]
+  status:Status
 }

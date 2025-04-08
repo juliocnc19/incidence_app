@@ -3,6 +3,7 @@ import { useLocalSearchParams } from "expo-router"
 import { incidentStorage } from "../../data/storage/incidentStorage"
 import CardDetail from "../../presentation/components/detail/CardDetail"
 import Incident from "../../core/models/Incident"
+import Attachments from "../../presentation/components/detail/Attachments"
 
 
 const Detail = () => {
@@ -14,6 +15,7 @@ const Detail = () => {
       contentContainerStyle={styles.contentContainer}
       showsVerticalScrollIndicator={false}>
       <CardDetail incident={(incidentFind as Incident)} />
+      <Attachments/>
     </ScrollView>
   )
 }

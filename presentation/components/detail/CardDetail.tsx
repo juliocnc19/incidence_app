@@ -41,8 +41,9 @@ const styles = StyleSheet.create({
   },
   headerCard: {
     flexDirection: "row",
+    alignItems:"center",
     justifyContent: "space-between",
-    marginVertical: 5
+    marginBottom:8
   },
   divider: {
     height: 2,

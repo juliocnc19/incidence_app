@@ -1,3 +1,5 @@
+import { Role } from "react-native"
+
 export default interface User {
   id: number
   first_name: string
@@ -10,4 +12,5 @@ export default interface User {
   created_at: string
   updated_at: string
   token:string
+  role:Role
 }
