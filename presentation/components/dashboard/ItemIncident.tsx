@@ -2,13 +2,13 @@ import { View,StyleSheet, Text, TouchableOpacity } from "react-native"
 import Incident from "../../../core/models/Incident"
 import { backgroundColors, fontColors } from "../../theme/colors"
 import { formatData } from "../../../utils/lib/formatDate"
-import StatusTag from "./StatusTag"
+import StatusTag from "../shared/StatusTag"
 import { useRouter } from "expo-router"
 
 const ItemIncident = ({item}:{item:Incident}) =>{
   const router = useRouter()
   return (
-    <TouchableOpacity style={styles.container} onPress={()=>router.push("/(detail)/detail")}>
+    <TouchableOpacity style={styles.container} onPress={()=>router.push( `/(detail)/${item.id}`)}>
       <View>
       <Text style={styles.text}>{item.title}</Text>
       <Text style={styles.date}>{formatData(item.created_at)}</Text>

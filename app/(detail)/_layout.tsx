@@ -6,28 +6,24 @@ import { fontColors } from "../../presentation/theme/colors"
 const DetailLayout = () => {
   const router = useRouter()
   return (
-    <View style={styles.container}>
       <Stack
         screenOptions={{
-          headerLeft: () => <FontAwesome name="arrow-left" color={fontColors.secondary} onPress={() => router.back()} size={22}/>,
+          headerLeft: () =>
+            <FontAwesome name="arrow-left" color={fontColors.secondary} onPress={() => router.back()} size={22} style={{ marginHorizontal: 5 }} />,
         }}
       >
         <Stack.Screen
-          name="detail"
+          name="[id]"
           options={{
-            title:""
+            title: "Detalle de la incidencia",
+            headerTitleStyle: { color: fontColors.secondary, fontSize:18 },
+            headerTitleAlign:"center"
           }}
         />
       </Stack>
-    </View>
   )
 }
 
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  }
-})
 
 export default DetailLayout

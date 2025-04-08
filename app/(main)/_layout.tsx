@@ -16,7 +16,7 @@ const MainLayout = () => {
             title: 'Incidencias',
             headerTitleStyle: {
               color: fontColors.secondary,
-              fontSize: 20
+              fontSize: 18
             },
             animation:"shift",
             headerTitleAlign: "center",
@@ -31,7 +31,7 @@ const MainLayout = () => {
             title: 'Nueva',
             headerTitleStyle: {
               color: fontColors.secondary,
-              fontSize: 20
+              fontSize: 18
             },
             headerTitleAlign: "center",
             animation:"shift",
