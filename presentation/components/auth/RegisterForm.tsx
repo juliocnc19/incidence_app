@@ -1,4 +1,4 @@
-import { View, Text, TextInput, StyleSheet, Pressable, ScrollView } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Pressable, ScrollView, ActivityIndicator } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { InputRegister } from '../../../utils/types/InputRegister';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -9,6 +9,7 @@ import { useRouter } from 'expo-router';
 import { saveToken } from '../../../utils/lib/saveToken';
 import { useState } from 'react';
 import MessageError from './MessageError';
+import { authStorage } from '../../../data/storage/authStorage';
 
 
 const RegisterForm = () => {
@@ -18,15 +19,17 @@ const RegisterForm = () => {
 
   const { isPending, isError, mutate } = useRegisterUser()
   const router = useRouter()
-  const [message,setMessage] = useState<string>("")
+  const [message, setMessage] = useState<string>("")
+  const { setUser } = authStorage()
 
   const onSubmit = async (data: InputRegister) => {
     mutate(data, {
-      onSuccess: async (data) => {
-        await saveToken(data.token)
+      onSuccess: async (response) => {
+        setUser(response.data)
+        await saveToken(response.token)
         router.push("/(main)/dashboard")
       },
-      onError: (err:any)=>{
+      onError: (err: any) => {
         setMessage(err.response.data.error)
       }
     })
@@ -35,7 +38,7 @@ const RegisterForm = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Registro</Text>
-      {isError && <MessageError message={message}/>}
+      {isError && <MessageError message={message} />}
       <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
         <Controller
           control={control}
@@ -144,7 +147,10 @@ const RegisterForm = () => {
         styles.button
         ]}
       >
-        <Text style={styles.buttonText}>Registrarse</Text>
+        {isPending ?
+          <ActivityIndicator size={"small"} color={backgroundColors.primary} /> :
+          <Text style={styles.buttonText}>Iniciar Sesión</Text>
+        }
       </Pressable>
     </View>
   );

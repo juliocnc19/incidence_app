@@ -1,5 +1,5 @@
 import { Text, StyleSheet, View } from "react-native"
-import { fontColors } from "../../theme/colors"
+import { backgroundColors, fontColors } from "../../theme/colors"
 
 const MessageError = ({ message }: { message: string }) => {
   return (
@@ -11,15 +11,15 @@ const MessageError = ({ message }: { message: string }) => {
 
 const styles = StyleSheet.create({
   text: {
-    color: fontColors.ternary,
+    color: fontColors.error,
     fontWeight: 500,
     textAlign: "center"
   },
   container: {
-    padding: 4,
+    padding: 8,
     marginVertical:8,
-    borderRadius: 12,
-    backgroundColor: fontColors.error
+    borderRadius: 10,
+    backgroundColor: backgroundColors.error
   }
 })
 
