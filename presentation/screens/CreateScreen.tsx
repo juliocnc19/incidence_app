@@ -1,9 +1,19 @@
-import { View, Text } from "react-native"
+import { View, StyleSheet } from "react-native"
+import CreateForm from "../components/dashboard/CreateForm"
 
 const CreateScreen = () => {
   return (
-    <View></View>
+    <View style={styles.container}>
+    <CreateForm/>
+    </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container:{
+    flex:1,
+    alignItems:"center"
+  }
+})
 
 export default CreateScreen

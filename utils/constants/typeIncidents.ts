@@ -5,7 +5,7 @@ const add = {
 }
 
 const retreat = {
-  "out":"Adicion",
+  "out":"Retiro",
   "attachemnt":[],
   "rules":[]
 }
