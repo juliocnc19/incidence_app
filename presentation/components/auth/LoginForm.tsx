@@ -38,7 +38,10 @@ const LoginForm = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>BIENVENIDO</Text>
+      <View>
+        <Text style={styles.title}>BIENVENIDO</Text>
+        <Text style={styles.messageText}>Para continuar inicie sesion</Text>
+      </View>
       <View>
         <Controller
           control={control}
@@ -123,6 +126,9 @@ const styles = StyleSheet.create({
     fontWeight: 700,
     textAlign: "center",
     color: fontColors.secondary,
+  },
+  messageText: {
+    textAlign: "center"
   },
   container: {
     width: "90%",

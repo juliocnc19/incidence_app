@@ -58,6 +58,23 @@ const RegisterForm = () => {
         />
         <Controller
           control={control}
+          name="cedula"
+          render={({ field: { value, onBlur, onChange } }) => (
+            <View style={styles.containerInput}>
+              <Text style={styles.textLabel}>Cedula</Text>
+              <TextInput
+                style={styles.input}
+                value={value}
+                onBlur={onBlur}
+                onChangeText={onChange}
+              />
+              {errors.cedula && <Text style={styles.errorText}>{errors.cedula.message}</Text>}
+            </View>
+          )}
+        />
+
+        <Controller
+          control={control}
           name="last_name"
           render={({ field: { value, onBlur, onChange } }) => (
             <View style={styles.containerInput}>
