@@ -10,5 +10,4 @@ export type InputRegister = {
   repet_password: User['password']
   role_id?: User['role_id']
   username: User['username']
-  avatar_url?: User['avatar_url']
 }
